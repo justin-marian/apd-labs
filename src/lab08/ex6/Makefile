@@ -1,0 +1,29 @@
+CC = mpicc
+CFLAGS = -O2
+
+TARGET = ex6
+SOURCES = ex6.c
+
+.PHONY: all run clean
+
+all: $(TARGET)
+
+$(TARGET): $(SOURCES)
+	$(CC) $(CFLAGS) -o $(TARGET) $(SOURCES)
+
+# 1. sudo nano /etc/sysctl.d/10-ptrace.conf
+# Change kernel.yama.ptrace_scope = 1 to 0
+
+# 2. Restricts ptrace -- allow full access
+# Shared memory transport mechanism (btl_vader_single_copy_mechanism)
+#--mca btl_vader_single_copy_mechanism none 
+
+# 3. mpirun -np 20 --oversubscribe ./pipeline_sort
+# To run the application with more processes
+# I'VE TRIED WITH 8 processes -- NOT ENOUGH SLOTS!!!
+
+run: 
+	mpirun -np 4 $(TARGET) 
+
+clean:
+	rm -f $(TARGET)

@@ -1,0 +1,8 @@
+Run 1
+mpirun -np 14 -mca btl_vader_single_copy_mechanism none --oversubscribe ranksort a2.txt
+Sorted vector: 118 118 386 430 515 608 703 709 786 819 
+
+Run 2
+mpirun -np 14 -mca btl_vader_single_copy_mechanism none --oversubscribe ranksort a2.txt
+Sorted vector: 118 118 386 430 515 608 703 709 786 819 
+
